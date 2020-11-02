@@ -31,6 +31,11 @@ class MyHomePage extends StatelessWidget {
     ),
   ];
 
+  static const PrimaryColor =  Color(0xFF008000);
+
+  String titleInput;
+  String amountInput;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,7 +43,7 @@ class MyHomePage extends StatelessWidget {
         title: Text('Flutter App'),
       ),
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Container(
@@ -48,6 +53,40 @@ class MyHomePage extends StatelessWidget {
               color: Colors.blue,
               elevation: 5,
               child: Text('Chart!'),
+            ),
+          ),
+          Card(
+            elevation: 5,
+            child: Container(
+              padding: EdgeInsets.all(10),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  TextField(
+                    decoration: InputDecoration(
+                      labelText: 'Title',
+                    ),
+                    onChanged: (val){
+                      titleInput = val;
+                    },
+                  ),
+                  TextField(
+                    decoration: InputDecoration(
+                      labelText: 'Amount',
+                    ),
+                    keyboardType: TextInputType.number,
+                    onChanged: (val) => amountInput = val,
+                  ),
+                  FlatButton(
+                    color: Colors.grey,
+                    onPressed: () {
+
+                    },
+                    child: Text('Add Transaction'),
+                    textColor: PrimaryColor,
+                  ),
+                ],
+              ),
             ),
           ),
           Column(
@@ -62,7 +101,7 @@ class MyHomePage extends StatelessWidget {
                       ),
                       decoration: BoxDecoration(
                         border: Border.all(
-                          color: Colors.purple,
+                          color: PrimaryColor,
                           width: 2,
                         ),
                       ),
@@ -72,7 +111,7 @@ class MyHomePage extends StatelessWidget {
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 20,
-                          color: Colors.purple,
+                          color: PrimaryColor,
                         ),
                       ),
                     ),
@@ -94,3 +133,4 @@ class MyHomePage extends StatelessWidget {
     );
   }
 }
+
