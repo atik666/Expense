@@ -3,6 +3,10 @@ import '../main.dart';
 
 class NewTransaction extends StatelessWidget {
 
+  final Function addTx;
+
+  NewTransaction(this.addTx);
+
   String titleInput;
   String amountInput;
 
@@ -33,7 +37,7 @@ class NewTransaction extends StatelessWidget {
             FlatButton(
               color: Colors.grey,
               onPressed: () {
-
+                addTx(titleInput, double.parse(amountInput),);
               },
               child: Text('Add Transaction'),
               textColor: PrimaryColor,
