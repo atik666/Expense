@@ -5,7 +5,7 @@ void main() {
   runApp(MyApp());
 }
 
-const PrimaryColor =  Color(0xFF008000);
+const PrimaryColor = Color(0xFF008000);
 
 class MyApp extends StatelessWidget {
   @override
@@ -18,7 +18,6 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatelessWidget {
-
   String titleInput;
   String amountInput;
 
@@ -27,6 +26,12 @@ class MyHomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Flutter App'),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.add),
+            onPressed: () {},
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -46,7 +51,11 @@ class MyHomePage extends StatelessWidget {
           ],
         ),
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        onPressed: (){},
+      ),
     );
   }
 }
-

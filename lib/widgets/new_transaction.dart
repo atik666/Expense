@@ -2,13 +2,24 @@ import 'package:flutter/material.dart';
 import '../main.dart';
 
 class NewTransaction extends StatelessWidget {
-
   final Function addTx;
 
   NewTransaction(this.addTx);
 
   String titleInput;
   String amountInput;
+
+  void submitData() {
+
+    if (titleInput.isEmpty || double.parse(amountInput) <= 0){
+      return;
+    }
+
+    addTx(
+      titleInput,
+      double.parse(amountInput),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,9 +34,10 @@ class NewTransaction extends StatelessWidget {
               decoration: InputDecoration(
                 labelText: 'Title',
               ),
-              onChanged: (val){
+              onChanged: (val) {
                 titleInput = val;
               },
+              onSubmitted: (_) => submitData,
             ),
             TextField(
               decoration: InputDecoration(
@@ -33,12 +45,11 @@ class NewTransaction extends StatelessWidget {
               ),
               keyboardType: TextInputType.number,
               onChanged: (val) => amountInput = val,
+              onSubmitted: (_) => submitData,
             ),
             FlatButton(
               color: Colors.grey,
-              onPressed: () {
-                addTx(titleInput, double.parse(amountInput),);
-              },
+              onPressed: submitData,
               child: Text('Add Transaction'),
               textColor: PrimaryColor,
             ),
