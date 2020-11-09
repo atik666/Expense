@@ -1,11 +1,32 @@
+import 'package:expense_manager/models/transaction.dart';
 import 'package:flutter/material.dart';
+import '../models/transaction.dart';
+import 'package:intl/intl.dart';
 
 class Chart extends StatelessWidget {
+  final List<Transaction> recentTransactions;
 
-  List <Map<String, Object>> get groupedTransactionsValues {
-    return List.generate(7, (index) =>
-    {
-      return {};
+  Chart(this.recentTransactions);
+
+  List<Map<String, Object>> get groupedTransactionsValues {
+    return List.generate(7, (index) {
+      final weekDay = DateTime.now().subtract(
+        Duration(days: index),
+      );
+      double totalSum = 0.0;
+
+      for (var i = 0; i < recentTransactions.length; i++) {
+        if (recentTransactions[i].date.day == weekDay.day &&
+            recentTransactions[i].date.month == weekDay.month &&
+            recentTransactions[i].date.year == weekDay.year) {
+          totalSum += recentTransactions[i].amount;
+        }
+      }
+
+      return {
+        'day': DateFormat.E().format(weekDay),
+        'amount': totalSum,
+      };
     });
   }
 
@@ -14,12 +35,8 @@ class Chart extends StatelessWidget {
     return Card(
       elevation: 6,
       margin: EdgeInsets.all(20),
-      child: (
-      Row(
-        children: [
-
-        ],
-      ),
+      child: Row(
+        children: [],
       ),
     );
   }
